@@ -31,7 +31,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <input type="text" value={this.state.characters.join("")} onChange={this.onTypeHanaddCharacterHandlerdler.bind(this)}/>
+        <input type="text" value={this.state.characters.join("")} onChange={this.addCharacterHandler.bind(this)}/>
         <Validation characters={this.state.characters}/>
         <div id="Characters">{characterComponents}</div>
       </div>
