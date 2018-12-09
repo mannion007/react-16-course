@@ -4,9 +4,7 @@ import Validation from './ValidationComponent';
 import Char from './CharComponent';
 
 class App extends Component {
-  state = {
-    characters: []
-  }
+  state = {characters: []}
 
   addCharacterHandler(event) {
     this.setState({content : event.target.value, characters : event.target.value.split("")})
@@ -26,13 +24,14 @@ class App extends Component {
           return <Char
             onClickHandler={() => this.removeCharacterHandler(index)}
             character={character}
-            key={index}/>
+            key={index}
+          />
         }
       )
 
     return (
       <div className="App">
-        <input type="text" value={this.state.characters.join("")} onChange={this.addCharacterHandler.bind(this)}/>
+        <input type="text" value={this.state.characters.join("")} onChange={this.onTypeHanaddCharacterHandlerdler.bind(this)}/>
         <Validation characters={this.state.characters}/>
         <div id="Characters">{characterComponents}</div>
       </div>
