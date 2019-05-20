@@ -1,39 +1,46 @@
 import React, { Component } from 'react';
 import './App.css';
-import Validation from './ValidationComponent';
-import Char from './CharComponent';
+
+import Validation from './Components/Validation/Validation';
+import Char from './Components/Char/Char';
 
 class App extends Component {
-  state = {characters: []}
 
-  addCharacterHandler(event) {
-    this.setState({content : event.target.value, characters : event.target.value.split("")})
+  state = {
+    input: []
   }
 
-  removeCharacterHandler(charIndex) {
-    let characters = [...this.state.characters]
-    characters.splice(charIndex, 1)
-    this.setState({characters: characters})
+  addCharacterHandler = (event) => {
+    this.setState(
+      {
+        input: event.target.value.split("")
+      }
+    );
+  }
+
+  removeCharacterHandler = (index) => {
+    const mutatedInput = [ ...this.state.input ]
+
+    mutatedInput.splice(index, 1);
+
+    this.setState(
+      {
+        input: mutatedInput
+      }
+    )
   }
 
   render() {
-    let characterComponents = null;
-
-      characterComponents = this.state.characters.map(
-        (character, index) => {
-          return <Char
-            onClickHandler={() => this.removeCharacterHandler(index)}
-            character={character}
-            key={index}
-          />
-        }
-      )
-
     return (
       <div className="App">
-        <input type="text" value={this.state.characters.join("")} onChange={this.addCharacterHandler.bind(this)}/>
-        <Validation characters={this.state.characters}/>
-        <div id="Characters">{characterComponents}</div>
+        <input type="text" onChange={this.addCharacterHandler} />
+        <p>{this.state.input.length}</p>
+        <Validation message={this.state.input} />
+        <div>
+          {
+            this.state.input.map((i, index) => {return <Char key={index} input={i} click={() => {this.removeCharacterHandler(index)}}/>})
+          }
+        </div>
       </div>
     );
   }
