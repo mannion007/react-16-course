@@ -9,6 +9,11 @@ const styles = {
 }
 
 const Team = (props) => {
+    
+    if (props.Name === "error") {
+        throw new Error("Kablamo");
+    }
+
     return (
         <div className="Team" style={styles}>
             Name: {props.Name}

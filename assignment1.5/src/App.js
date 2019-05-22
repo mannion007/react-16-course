@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Team from './Components/Team/Team';
+import ErrorBoundary from './Components/ErrorHandler/ErrorHandler';
 
 class App extends Component {
 
@@ -83,7 +84,9 @@ class App extends Component {
         this.state.teams.map(
           (team, index) => {
             return (
-              <Team key={index} Name={team.Name} Members={team.Members} Change={(event) => { this.onChangeHandler(event, team.id) }} />
+              <ErrorBoundary key={index}>
+                <Team Name={team.Name} Members={team.Members} Change={(event) => { this.onChangeHandler(event, team.id) }} />
+              </ErrorBoundary>
             )
           }
         )

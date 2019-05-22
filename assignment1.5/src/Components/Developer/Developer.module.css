@@ -1,0 +1,11 @@
+span {
+    font-weight: 700;
+}
+
+.name {
+    color:blue;
+}
+
+.name:hover {
+    color:blueviolet;
+}
