@@ -1,5 +1,5 @@
 import React from 'react';
-import Developer from '../Developer/Developer';
+import Developer from '../../Developer/Developer';
 
 const styles = {
     border: "1px solid #ccc",
