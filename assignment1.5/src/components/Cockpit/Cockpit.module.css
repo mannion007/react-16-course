@@ -1,0 +1,18 @@
+.Cockpit h1 {
+    color:purple;
+}
+
+.Cockpit button {
+    padding: 15px;
+    margin:10px;
+    border:none;
+    background-color: aqua;
+}
+
+.Cockpit button:hover {
+    background-color: aquamarine;
+}
+
+.Cockpit .Red {
+    background-color: crimson;
+}

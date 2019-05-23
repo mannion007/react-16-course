@@ -1,73 +1,39 @@
 import React, { Component } from 'react';
 import './App.css';
-import Team from '../components/Teams/Team/Team';
+import Teams from '../components/Teams/Teams';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 
 class App extends Component {
-
   state = {
     showTeams: true,
     teams: [
       {
         id: 1,
-        Name: "rfrf",
-        Members: [
-          {
-            Name: "James",
-            Role: "Backend Engineer"
-
-          },
-          {
-            Name: "Hristo",
-            Role: "Frontend Engineer"
-
-          }
+        name: "rfrf",
+        members: [
+          {name: "James", role: "Backend Engineer"},
+          {name: "Hristo", role: "Frontend Engineer"}
         ]
       },
       {
         id: 2,
-        Name: "Decisioning",
-        Members: [
-          {
-            Name: "Tom",
-            Role: "Backend Engineer"
-
-          },
-          {
-            Name: "Emmet",
-            Role: "Frontend Engineer"
-
-          }
-        ]
-      },
-      {
-        id: 3,
-        Name: "Revolving",
-        Members: [
-          {
-            Name: "Joe",
-            Role: "Backend Engineer"
-
-          },
-          {
-            Name: "Robinson",
-            Role: "Frontend Engineer"
-
-          }
+        name: "Decisioning",
+        members: [
+          {name: "Tom", role: "Backend Engineer"},
+          {name: "Emmet", role: "Frontend Engineer"}
         ]
       }
     ]
   }
 
-  toggleTeamsHandler() {
-    this.setState({showTeams: !this.state.showTeams})
-  }
+  toggleTeamsHandler = () => this.setState({showTeams: !this.state.showTeams})
 
-  onChangeHandler(event, id) {
+  nameChangeHandler = (event, id) => {
     const teamIndex = this.state.teams.findIndex((t) => { return t.id === id });
 
     const changedTeam = { ...this.state.teams[teamIndex] };
-    changedTeam.Name = event.target.value;
+    changedTeam.name = event.target.value;
 
     const teams = [...this.state.teams];
     teams[teamIndex] = changedTeam;
@@ -76,24 +42,19 @@ class App extends Component {
   }
 
   render() {
-
-    let teams = [];
+    
+    let teams = null;
 
     if (this.state.showTeams) {
-      teams = (
-        this.state.teams.map(
-          (team, index) => {
-            return (
-                <Team key={index} Name={team.Name} Members={team.Members} Change={(event) => { this.onChangeHandler(event, team.id) }} />
-            )
-          }
-        )
-      )
+      teams = <Teams teams={this.state.teams} changed={this.nameChangeHandler}/>
     }
 
     return (
       <div className="App">
-        <button onClick={this.toggleTeamsHandler.bind(this)}>Toggle Teams</button>
+        <Cockpit
+          click={this.toggleTeamsHandler}
+          showTeams={this.state.showTeams}
+        />
         {teams}
       </div>
     );

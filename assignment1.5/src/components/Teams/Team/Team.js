@@ -16,13 +16,13 @@ const Team = (props) => {
 
     return (
         <div className="Team" style={styles}>
-            Name: {props.Name}
+            Name: {props.name}
             {
-                props.Members.map(
-                    (member, index) => { return <Developer key={index} Name={member.Name} Role={member.Role} /> }
+                props.members.map(
+                    (member, index) => { return <Developer key={index} name={member.name} role={member.role} /> }
                 )
             }
-            <input type="text" value={props.Name} onChange={props.Change}/>
+            <input type="text" value={props.name} onChange={props.change}/>
         </div>
         
     );
