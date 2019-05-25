@@ -8,9 +8,8 @@ const styles = {
     padding: "10px"
 }
 
-const Team = (props) => {
-    
-    if (props.Name === "error") {
+const Team = props => {
+    if (props.name === "error") {
         throw new Error("Kablamo");
     }
 
@@ -24,7 +23,6 @@ const Team = (props) => {
             }
             <input type="text" value={props.name} onChange={props.change}/>
         </div>
-        
     );
 }
 

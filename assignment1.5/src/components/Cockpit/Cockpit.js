@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './Cockpit.module.css';
 
-const Cockpit = (props) => {
+const Cockpit = props => {
+
+    useEffect(
+        () => {
+            console.log('[Team] useEffect');
+            setTimeout(() => {alert('Saved data to cloud...')}, 500);
+        },
+        [props.teams]
+    );
+
     return (
         <div className={styles.Cockpit}>
             <h1>{props.title}</h1>
@@ -10,4 +19,4 @@ const Cockpit = (props) => {
     );
 }
 
-export default Cockpit;
+export default React.memo(Cockpit);
