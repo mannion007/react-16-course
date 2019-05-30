@@ -1,5 +1,6 @@
 import React from 'react';
 import Developer from '../../Developer/Developer';
+import AuthContext from '../../../context/auth-context';
 
 const styles = {
     border: "1px solid #ccc",
@@ -9,9 +10,8 @@ const styles = {
 }
 
 const Team = props => {
-    if (props.name === "error") {
-        throw new Error("Kablamo");
-    }
+
+    
 
     return (
         <div className="Team" style={styles}>
@@ -21,7 +21,9 @@ const Team = props => {
                     (member, index) => { return <Developer key={index} name={member.name} role={member.role} /> }
                 )
             }
-            <input type="text" value={props.name} onChange={props.change}/>
+            <AuthContext.Consumer>
+                { (context) => context.authenticated ? <input type="text" value={props.name} onChange={props.change} /> : null }
+            </AuthContext.Consumer>
         </div>
     );
 }

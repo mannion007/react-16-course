@@ -4,13 +4,13 @@
 
 .Cockpit button {
     padding: 15px;
-    margin:10px;
+    margin:10px 0;
     border:none;
-    background-color: aqua;
+    background-color: cadetblue;
 }
 
 .Cockpit button:hover {
-    background-color: aquamarine;
+    background-color: darkcyan;
 }
 
 .Cockpit .Red {

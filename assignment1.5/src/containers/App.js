@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styles from './App.module.css';
 import Cockpit from '../components/Cockpit/Cockpit';
 import Teams from '../components/Teams/Teams';
-import WithClass from '../components/HigherOrder/WithClass';
+import AuthContext from '../context/auth-context';
 
 class App extends Component {
 
@@ -11,7 +11,10 @@ class App extends Component {
     super(props);
 
     this.state = {
-      showTeams: true,
+      authenticated: false,
+      showTeams: false,
+      showCockpit: true,
+      changeCounter: 0,
       teams: [
         {
           id: 1,
@@ -27,6 +30,14 @@ class App extends Component {
           members: [
             { name: "Tom", role: "Backend Engineer" },
             { name: "Emmet", role: "Frontend Engineer" }
+          ]
+        },
+        {
+          id: 3,
+          name: "Third",
+          members: [
+            { name: "Robinson", role: "Backend Engineer" },
+            { name: "Joe", role: "Frontend Engineer" }
           ]
         }
       ]
@@ -63,7 +74,29 @@ class App extends Component {
     const teams = [...this.state.teams];
     teams[teamIndex] = changedTeam;
 
-    this.setState({ teams: teams });
+    this.setState(
+      (prevState, props) => {
+        return {
+          teams: teams,
+          changeCounter: prevState.changeCounter + 1
+        }
+      }
+    );
+  }
+
+  hideCockpitHandler = () => {
+    this.setState({ showCockpit: false });
+  }
+
+  toggleAuthenticatedHandler = () => {
+    this.setState(
+
+      (prevState, props) => {
+        return {
+          authenticated: !prevState.authenticated
+        }
+      }
+    );
   }
 
   render() {
@@ -77,17 +110,23 @@ class App extends Component {
     }
 
     return (
-      <WithClass classes={styles.App}>
-        <Cockpit
-          title={this.props.title}
-          click={this.toggleTeamsHandler}
-          change={this.renameTeamHandler}
-          showTeams={this.state.showTeams}
-          teams={this.state.teams}
-        />
-        {teams}
-      </WithClass>
+      <div className={styles.App}>
+        <button onClick={this.hideCockpitHandler}>Remove Cockpit</button>
+        <AuthContext.Provider value={{ authenticated: this.state.authenticated, authenticate: this.toggleAuthenticatedHandler }}>
+          {this.state.showCockpit ? (
+            <Cockpit
+              title={this.props.title}
+              click={this.toggleTeamsHandler}
+              change={this.renameTeamHandler}
+              showTeams={this.state.showTeams}
+              teams={this.state.teams}
+            />
+          ) : null
 
+          }
+          {teams}
+        </AuthContext.Provider>
+      </div>
     );
   }
 }
