@@ -8,3 +8,25 @@
     margin: auto;
     padding: 10px 0;
 }
+
+.OrderButton {
+    display: block;
+    font: inherit;
+    padding: 15px 5px;
+    margin: 10px 5px;
+    width: 160px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 1px 2px 4px #333;
+}
+
+.OrderButton:enabled {
+    background-color: green; 
+    color: white;
+}
+
+.OrderButton:disabled {
+    background: lightgrey;
+    color:grey;
+}
