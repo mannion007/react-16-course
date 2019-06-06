@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classes from './BurgerIngredient.module.css';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classes from './BurgerIngredient.module.css'
 
 const burgerIngredient = (props) => {
 
@@ -29,10 +29,10 @@ const burgerIngredient = (props) => {
     if (type === 'bacon') {
         return <div className={classes.Bacon}></div>
     }
-};
+}
 
 burgerIngredient.propTypes = {
     type: PropTypes.oneOf(['bread-bottom', 'bread-top', 'meat', 'cheese', 'salad', 'bacon'])
 }
 
-export default burgerIngredient;
+export default burgerIngredient
